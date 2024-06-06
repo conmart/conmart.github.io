@@ -18,7 +18,6 @@ var box = document.getElementById('t1'),
 
 init();
 
-// reset constraints on resize
 window.addEventListener(
   'resize',
   function () {
@@ -27,6 +26,14 @@ window.addEventListener(
   },
   false
 );
+
+box.addEventListener('mouseenter', () => {
+  window.cancelAnimationFrame(request);
+})
+
+box.addEventListener('mouseleave', () => {
+  init();
+});
 
 function init() {
   request = requestAnimationFrame(init);
