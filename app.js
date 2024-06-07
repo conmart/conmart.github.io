@@ -1,32 +1,7 @@
-const icons = [
-  {
-    img: 'assets/nh.webp',
-  },
-  {
-    img: 'assets/rg.jpeg',
-  },
-];
-
-console.log('hit me')
-let iconCount = 1;
-icons.forEach((icon) => {
-  const iconId = `icon${iconCount}`;
-  const div = document.createElement('DIV');
-  div.setAttribute('class', `iconContainer`);
-  div.setAttribute('id', iconId);
-  document.getElementById('mainContainer').appendChild(div);
-  const html = 
-    `<div class="iconContainer" id="icon${iconCount}">
-      <img src="${icon.img}" />
-    </div>`;
-  iconCount ++;
-  document.getElementById(iconId).innerHTML = html;
-});
-
 let ww = window.innerWidth,
   wh = window.innerHeight,
-  translateX = Math.floor(Math.random() * ww + 1),
-  translateY = Math.floor(Math.random() * wh + 1),
+  // translateX = Math.floor(Math.random() * ww + 1),
+  // translateY = Math.floor(Math.random() * wh + 1),
   // boxWidth = box.offsetWidth,
   // boxHeight = box.offsetHeight,
   // boxTop = box.offsetTop,
@@ -39,6 +14,59 @@ let ww = window.innerWidth,
   directions = ['se', 'sw', 'ne', 'nw'],
   speed = 2,
   timeout = null;
+
+const icons = [
+  {
+    img: 'assets/nh.webp',
+  },
+  {
+    img: 'assets/rg.jpeg',
+  },
+];
+
+const createIcon = (iconId, src) => {
+  const div = document.createElement('DIV');
+  div.setAttribute('class', `iconContainer`);
+  div.setAttribute('id', iconId);
+  document.getElementById('mainContainer').appendChild(div);
+  const html = `<div class="iconContainer" id="icon${iconCount}">
+      <img src="${src}" />
+    </div>`;
+  document.getElementById(iconId).innerHTML = html;
+  initialIconPosition(div)
+};
+
+const initialIconPosition = (element) => {
+  const initialX = Math.floor(Math.random() * ww + 1);
+  const initialY = Math.floor(Math.random() * wh + 1);
+  setStyle(element, {
+    transform: 'translate3d(' + initialX + 'px, ' + initialY + 'px, 0)',
+  });
+};
+
+let iconCount = 1;
+icons.forEach((icon) => {
+  const iconId = `icon${iconCount}`;
+  createIcon(iconId, icon.img);
+  iconCount++;
+});
+
+// let ww = window.innerWidth,
+//   wh = window.innerHeight,
+//   translateX = Math.floor(Math.random() * ww + 1),
+//   translateY = Math.floor(Math.random() * wh + 1),
+//   // boxWidth = box.offsetWidth,
+//   // boxHeight = box.offsetHeight,
+//   // boxTop = box.offsetTop,
+//   // boxLeft = box.offsetLeft,
+//   // xMin = -boxLeft,
+//   // yMin = -boxTop,
+//   // xMax = window.innerWidth - boxLeft - boxWidth,
+//   // yMax = window.innerHeight - boxTop - boxHeight,
+//   // request = null,
+//   directions = ['se', 'sw', 'ne', 'nw'],
+//   speed = 2,
+//   timeout = null;
 
 // init();
 
@@ -132,33 +160,33 @@ let ww = window.innerWidth,
 //   }
 // }
 
-// function getVendor() {
-//   var ua = navigator.userAgent.toLowerCase(),
-//     match =
-//       /opera/.exec(ua) ||
-//       /msie/.exec(ua) ||
-//       /firefox/.exec(ua) ||
-//       /(chrome|safari)/.exec(ua) ||
-//       /trident/.exec(ua),
-//     vendors = {
-//       opera: '-o-',
-//       chrome: '-webkit-',
-//       safari: '-webkit-',
-//       firefox: '-moz-',
-//       trident: '-ms-',
-//       msie: '-ms-',
-//     };
+function getVendor() {
+  var ua = navigator.userAgent.toLowerCase(),
+    match =
+      /opera/.exec(ua) ||
+      /msie/.exec(ua) ||
+      /firefox/.exec(ua) ||
+      /(chrome|safari)/.exec(ua) ||
+      /trident/.exec(ua),
+    vendors = {
+      opera: '-o-',
+      chrome: '-webkit-',
+      safari: '-webkit-',
+      firefox: '-moz-',
+      trident: '-ms-',
+      msie: '-ms-',
+    };
 
-//   return vendors[match[0]];
-// }
+  return vendors[match[0]];
+}
 
-// function setStyle(element, properties) {
-//   var prefix = getVendor(),
-//     property,
-//     css = '';
-//   for (property in properties) {
-//     css += property + ': ' + properties[property] + ';';
-//     css += prefix + property + ': ' + properties[property] + ';';
-//   }
-//   element.style.cssText += css;
-// }
+function setStyle(element, properties) {
+  var prefix = getVendor(),
+    property,
+    css = '';
+  for (property in properties) {
+    css += property + ': ' + properties[property] + ';';
+    css += prefix + property + ': ' + properties[property] + ';';
+  }
+  element.style.cssText += css;
+}
