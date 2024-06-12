@@ -1,16 +1,13 @@
 let ww = window.innerWidth,
   wh = window.innerHeight,
-  // translateX = Math.floor(Math.random() * ww + 1),
-  // translateY = Math.floor(Math.random() * wh + 1),
-  // boxWidth = box.offsetWidth,
-  // boxHeight = box.offsetHeight,
-  // boxTop = box.offsetTop,
-  // boxLeft = box.offsetLeft,
-  // xMin = -boxLeft,
-  // yMin = -boxTop,
-  // xMax = window.innerWidth - boxLeft - boxWidth,
-  // yMax = window.innerHeight - boxTop - boxHeight,
-  // request = null,
+  boxWidth = 118,
+  boxHeight = 118,
+  boxTop = 8,
+  boxLeft = 8,
+  xMin = -boxLeft,
+  yMin = -boxTop,
+  xMax = window.innerWidth - boxLeft - boxWidth,
+  yMax = window.innerHeight - boxTop - boxHeight,
   directions = ['se', 'sw', 'ne', 'nw'],
   speed = 2,
   timeout = null;
@@ -24,32 +21,39 @@ const icons = [
   },
 ];
 
-const createIcon = (iconId, src) => {
+const createIcon = (icon) => {
   const div = document.createElement('DIV');
   div.setAttribute('class', `iconContainer`);
-  div.setAttribute('id', iconId);
+  div.setAttribute('id', icon['id']);
+  div.innerHTML = `<img src="${icon['img']}" />`;
   document.getElementById('mainContainer').appendChild(div);
-  const html = `<div class="iconContainer" id="icon${iconCount}">
-      <img src="${src}" />
-    </div>`;
-  document.getElementById(iconId).innerHTML = html;
-  initialIconPosition(div)
+  initialIconPosition(icon);
+  animateIcon(div, icon);
 };
 
-const initialIconPosition = (element) => {
+const animateIcon = (div, icon) => {
+  request = requestAnimationFrame(() => animateIcon(div, icon));
+  icon['request'] = request;
+  move(icon)
+}
+
+const initialIconPosition = (icon) => {
   const initialX = Math.floor(Math.random() * ww + 1);
   const initialY = Math.floor(Math.random() * wh + 1);
-  setStyle(element, {
-    transform: 'translate3d(' + initialX + 'px, ' + initialY + 'px, 0)',
-  });
+  icon['translateX'] = initialX;
+  icon['translateY'] = initialY;
 };
 
-let iconCount = 1;
+let iconIndex = 0;
 icons.forEach((icon) => {
-  const iconId = `icon${iconCount}`;
-  createIcon(iconId, icon.img);
-  iconCount++;
+  const iconId = `icon${iconIndex}`;
+  icon['id'] = iconId;
+  icon['direction'] = directions[Math.floor(Math.random() * 4)];
+  createIcon(icon);
+  iconIndex++;
 });
+
+console.log(icons);
 
 // let ww = window.innerWidth,
 //   wh = window.innerHeight,
@@ -70,14 +74,14 @@ icons.forEach((icon) => {
 
 // init();
 
-// window.addEventListener(
-//   'resize',
-//   function () {
-//     clearTimeout(timeout);
-//     timeout = setTimeout(update, 100);
-//   },
-//   false
-// );
+window.addEventListener(
+  'resize',
+  function () {
+    clearTimeout(timeout);
+    timeout = setTimeout(update, 100);
+  },
+  false
+);
 
 // box.addEventListener('mouseenter', () => {
 //   window.cancelAnimationFrame(request);
@@ -92,73 +96,81 @@ icons.forEach((icon) => {
 //   move();
 // }
 
-// // reset constraints
-// function update() {
-//   xMin = -boxLeft;
-//   yMin = -boxTop;
-//   xMax = window.innerWidth - boxLeft - boxWidth;
-//   yMax = window.innerHeight - boxTop - boxHeight;
-// }
+// reset constraints
+function update() {
+  xMin = -boxLeft;
+  yMin = -boxTop;
+  xMax = window.innerWidth - boxLeft - boxWidth;
+  yMax = window.innerHeight - boxTop - boxHeight;
+}
 
-// function move() {
-//   setDirection();
-//   setStyle(box, {
-//     transform: 'translate3d(' + translateX + 'px, ' + translateY + 'px, 0)',
-//   });
-// }
+function move(icon) {
+  console.log('hit move', icon)
+  setDirection(icon);
+  setStyle(icon, {
+    transform:
+      'translate3d(' +
+      icon['translateX'] +
+      'px, ' +
+      icon['translateY'] +
+      'px, 0)',
+  });
+}
 
-// function setDirection(direction) {
-//   switch (direction) {
-//     case 'ne':
-//       translateX += speed;
-//       translateY -= speed;
-//       break;
-//     case 'nw':
-//       translateX -= speed;
-//       translateY -= speed;
-//       break;
-//     case 'se':
-//       translateX += speed;
-//       translateY += speed;
-//       break;
-//     case 'sw':
-//       translateX -= speed;
-//       translateY += speed;
-//       break;
-//   }
-//   setLimits();
-// }
+function setDirection(icon) {
+  switch (icon['direction']) {
+    case 'ne':
+      icon['translateX'] += speed;
+      icon['translateY'] -= speed;
+      break;
+    case 'nw':
+      icon['translateX'] -= speed;
+      icon['translateY'] -= speed;
+      break;
+    case 'se':
+      icon['translateX'] += speed;
+      icon['translateY'] += speed;
+      break;
+    case 'sw':
+      icon['translateX'] -= speed;
+      icon['translateY'] += speed;
+      break;
+  }
+  setLimits(icon);
+}
 
-// function setLimits() {
-//   if (translateY <= yMin) {
-//     if (direction == 'nw') {
-//       direction = 'sw';
-//     } else if (direction == 'ne') {
-//       direction = 'se';
-//     }
-//   }
-//   if (translateY >= yMax) {
-//     if (direction == 'se') {
-//       direction = 'ne';
-//     } else if (direction == 'sw') {
-//       direction = 'nw';
-//     }
-//   }
-//   if (translateX <= xMin) {
-//     if (direction == 'nw') {
-//       direction = 'ne';
-//     } else if (direction == 'sw') {
-//       direction = 'se';
-//     }
-//   }
-//   if (translateX >= xMax) {
-//     if (direction == 'ne') {
-//       direction = 'nw';
-//     } else if (direction == 'se') {
-//       direction = 'sw';
-//     }
-//   }
-// }
+function setLimits(icon) {
+  let direction = icon['direction'];
+  if (icon['translateY'] <= yMin) {
+    if (direction == 'nw') {
+      direction = 'sw';
+    } else if (direction == 'ne') {
+      direction = 'se';
+    }
+  }
+  if (icon['translateY'] >= yMax) {
+    if (direction == 'se') {
+      direction = 'ne';
+    } else if (direction == 'sw') {
+      direction = 'nw';
+    }
+  }
+  if (icon['translateX'] <= xMin) {
+    if (direction == 'nw') {
+      direction = 'ne';
+    } else if (direction == 'sw') {
+      direction = 'se';
+    }
+  }
+  if (icon['translateX'] >= xMax) {
+    if (direction == 'ne') {
+      direction = 'nw';
+    } else if (direction == 'se') {
+      direction = 'sw';
+    }
+  }
+  icon['direction'] = direction;
+}
 
 function getVendor() {
   var ua = navigator.userAgent.toLowerCase(),
@@ -180,7 +192,8 @@ function getVendor() {
   return vendors[match[0]];
 }
 
-function setStyle(element, properties) {
+function setStyle(icon, properties) {
+  const element = document.getElementById(icon['id']);
   var prefix = getVendor(),
     property,
     css = '';
