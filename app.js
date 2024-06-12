@@ -29,13 +29,24 @@ const createIcon = (icon) => {
   document.getElementById('mainContainer').appendChild(div);
   initialIconPosition(icon);
   animateIcon(div, icon);
+  stopOnHover(div, icon);
+};
+
+const stopOnHover = (div, icon) => {
+  console.log(div, icon, 'stopOnHover')
+  div.addEventListener('mouseenter', () => {
+    window.cancelAnimationFrame(icon['request']);
+  });
+  div.addEventListener('mouseleave', () => {
+    animateIcon(div, icon);
+  });
 };
 
 const animateIcon = (div, icon) => {
   request = requestAnimationFrame(() => animateIcon(div, icon));
   icon['request'] = request;
-  move(icon)
-}
+  move(icon);
+};
 
 const initialIconPosition = (icon) => {
   const initialX = Math.floor(Math.random() * ww + 1);
@@ -53,27 +64,6 @@ icons.forEach((icon) => {
   iconIndex++;
 });
 
-console.log(icons);
-
-// let ww = window.innerWidth,
-//   wh = window.innerHeight,
-//   translateX = Math.floor(Math.random() * ww + 1),
-//   translateY = Math.floor(Math.random() * wh + 1),
-//   // boxWidth = box.offsetWidth,
-//   // boxHeight = box.offsetHeight,
-//   // boxTop = box.offsetTop,
-//   // boxLeft = box.offsetLeft,
-//   // xMin = -boxLeft,
-//   // yMin = -boxTop,
-//   // xMax = window.innerWidth - boxLeft - boxWidth,
-//   // yMax = window.innerHeight - boxTop - boxHeight,
-//   // request = null,
-//   directions = ['se', 'sw', 'ne', 'nw'],
-//   speed = 2,
-//   timeout = null;
-
-// init();
-
 window.addEventListener(
   'resize',
   function () {
@@ -83,20 +73,6 @@ window.addEventListener(
   false
 );
 
-// box.addEventListener('mouseenter', () => {
-//   window.cancelAnimationFrame(request);
-// });
-
-// box.addEventListener('mouseleave', () => {
-//   init();
-// });
-
-// function init() {
-//   request = requestAnimationFrame(init);
-//   move();
-// }
-
-// reset constraints
 function update() {
   xMin = -boxLeft;
   yMin = -boxTop;
@@ -105,7 +81,6 @@ function update() {
 }
 
 function move(icon) {
-  console.log('hit move', icon)
   setDirection(icon);
   setStyle(icon, {
     transform:
