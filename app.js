@@ -36,7 +36,6 @@ const createIcon = (icon) => {
 };
 
 const stopOnHover = (div, icon) => {
-  console.log(div, icon, 'stopOnHover');
   div.addEventListener('mouseenter', () => {
     window.cancelAnimationFrame(icon['request']);
   });
@@ -180,4 +179,9 @@ function setStyle(icon, properties) {
     css += prefix + property + ': ' + properties[property] + ';';
   }
   element.style.cssText += css;
+}
+
+const slider = document.getElementById('iconSpeed');
+slider.oninput = () => {
+  speed = parseInt(slider.value)/2;
 }
