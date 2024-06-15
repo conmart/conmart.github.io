@@ -14,10 +14,13 @@ let ww = window.innerWidth,
 
 const icons = [
   {
-    img: 'assets/nh.webp',
+    img: 'assets/nhII.png',
   },
   {
     img: 'assets/rg.jpeg',
+  },
+  {
+    img: 'assets/NRDSII.png',
   },
 ];
 
@@ -33,7 +36,7 @@ const createIcon = (icon) => {
 };
 
 const stopOnHover = (div, icon) => {
-  console.log(div, icon, 'stopOnHover')
+  console.log(div, icon, 'stopOnHover');
   div.addEventListener('mouseenter', () => {
     window.cancelAnimationFrame(icon['request']);
   });
