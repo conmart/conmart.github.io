@@ -12,7 +12,7 @@
 }
 
 .iconContainer img {
-  max-width: 100%;
+  max-width: 105%;
 }
 
 .mainContainer {
@@ -23,4 +23,6 @@
   position: absolute;
   bottom: 1rem;
   left: 1rem;
+  display: flex;
+  flex-direction: column;
 }
