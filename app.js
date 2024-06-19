@@ -12,7 +12,7 @@ let ww = window.innerWidth,
   speed = 2,
   timeout = null;
 
-const icons = [
+const orbs = [
   {
     img: 'assets/nhII.png',
   },
@@ -24,46 +24,49 @@ const icons = [
   },
 ];
 
-const createIcon = (icon) => {
+const createOrb = (orb) => {
   const div = document.createElement('DIV');
-  div.setAttribute('class', `iconContainer`);
-  div.setAttribute('id', icon['id']);
-  div.innerHTML = `<img src="${icon['img']}" />`;
+  div.setAttribute('class', `orbContainer`);
+  div.setAttribute('id', orb['id']);
+  div.innerHTML = `
+    <div class="test">hi there</div>
+    <div class="imgContainer"><img src="${orb['img']}" /></div>
+  `;
   document.getElementById('mainContainer').appendChild(div);
-  initialIconPosition(icon);
-  animateIcon(div, icon);
-  stopOnHover(div, icon);
+  initialOrbPosition(orb);
+  // animateOrb(div, orb);
+  // stopOnHover(div, orb);
 };
 
-const stopOnHover = (div, icon) => {
+const stopOnHover = (div, orb) => {
   div.addEventListener('mouseenter', () => {
-    window.cancelAnimationFrame(icon['request']);
+    window.cancelAnimationFrame(orb['request']);
   });
   div.addEventListener('mouseleave', () => {
-    animateIcon(div, icon);
+    animateOrb(div, orb);
   });
 };
 
-const animateIcon = (div, icon) => {
-  request = requestAnimationFrame(() => animateIcon(div, icon));
-  icon['request'] = request;
-  move(icon);
+const animateOrb = (div, orb) => {
+  request = requestAnimationFrame(() => animateOrb(div, orb));
+  orb['request'] = request;
+  move(orb);
 };
 
-const initialIconPosition = (icon) => {
+const initialOrbPosition = (orb) => {
   const initialX = Math.floor(Math.random() * ww + 1);
   const initialY = Math.floor(Math.random() * wh + 1);
-  icon['translateX'] = initialX;
-  icon['translateY'] = initialY;
+  orb['translateX'] = initialX;
+  orb['translateY'] = initialY;
 };
 
-let iconIndex = 0;
-icons.forEach((icon) => {
-  const iconId = `icon${iconIndex}`;
-  icon['id'] = iconId;
-  icon['direction'] = directions[Math.floor(Math.random() * 4)];
-  createIcon(icon);
-  iconIndex++;
+let orbIndex = 0;
+orbs.forEach((orb) => {
+  const orbId = `orb${orbIndex}`;
+  orb['id'] = orbId;
+  orb['direction'] = directions[Math.floor(Math.random() * 4)];
+  createOrb(orb);
+  orbIndex++;
 });
 
 window.addEventListener(
@@ -82,71 +85,71 @@ function update() {
   yMax = window.innerHeight - boxTop - boxHeight;
 }
 
-function move(icon) {
-  setDirection(icon);
-  setStyle(icon, {
+function move(orb) {
+  setDirection(orb);
+  setStyle(orb, {
     transform:
       'translate3d(' +
-      icon['translateX'] +
+      orb['translateX'] +
       'px, ' +
-      icon['translateY'] +
+      orb['translateY'] +
       'px, 0)',
   });
 }
 
-function setDirection(icon) {
-  switch (icon['direction']) {
+function setDirection(orb) {
+  switch (orb['direction']) {
     case 'ne':
-      icon['translateX'] += speed;
-      icon['translateY'] -= speed;
+      orb['translateX'] += speed;
+      orb['translateY'] -= speed;
       break;
     case 'nw':
-      icon['translateX'] -= speed;
-      icon['translateY'] -= speed;
+      orb['translateX'] -= speed;
+      orb['translateY'] -= speed;
       break;
     case 'se':
-      icon['translateX'] += speed;
-      icon['translateY'] += speed;
+      orb['translateX'] += speed;
+      orb['translateY'] += speed;
       break;
     case 'sw':
-      icon['translateX'] -= speed;
-      icon['translateY'] += speed;
+      orb['translateX'] -= speed;
+      orb['translateY'] += speed;
       break;
   }
-  setLimits(icon);
+  setLimits(orb);
 }
 
-function setLimits(icon) {
-  let direction = icon['direction'];
-  if (icon['translateY'] <= yMin) {
+function setLimits(orb) {
+  let direction = orb['direction'];
+  if (orb['translateY'] <= yMin) {
     if (direction == 'nw') {
       direction = 'sw';
     } else if (direction == 'ne') {
       direction = 'se';
     }
   }
-  if (icon['translateY'] >= yMax) {
+  if (orb['translateY'] >= yMax) {
     if (direction == 'se') {
       direction = 'ne';
     } else if (direction == 'sw') {
       direction = 'nw';
     }
   }
-  if (icon['translateX'] <= xMin) {
+  if (orb['translateX'] <= xMin) {
     if (direction == 'nw') {
       direction = 'ne';
     } else if (direction == 'sw') {
       direction = 'se';
     }
   }
-  if (icon['translateX'] >= xMax) {
+  if (orb['translateX'] >= xMax) {
     if (direction == 'ne') {
       direction = 'nw';
     } else if (direction == 'se') {
       direction = 'sw';
     }
   }
-  icon['direction'] = direction;
+  orb['direction'] = direction;
 }
 
 function getVendor() {
@@ -169,8 +172,8 @@ function getVendor() {
   return vendors[match[0]];
 }
 
-function setStyle(icon, properties) {
-  const element = document.getElementById(icon['id']);
+function setStyle(orb, properties) {
+  const element = document.getElementById(orb['id']);
   var prefix = getVendor(),
     property,
     css = '';
@@ -181,7 +184,7 @@ function setStyle(icon, properties) {
   element.style.cssText += css;
 }
 
-const slider = document.getElementById('iconSpeed');
+const slider = document.getElementById('orbSpeed');
 slider.oninput = () => {
-  speed = parseInt(slider.value)/2;
-}
+  speed = parseInt(slider.value) / 2;
+};
