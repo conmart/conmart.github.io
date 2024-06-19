@@ -1,6 +1,4 @@
-let ww = window.innerWidth,
-  wh = window.innerHeight,
-  boxWidth = 118,
+let boxWidth = 118,
   boxHeight = 118,
   boxTop = 8,
   boxLeft = 8,
@@ -15,12 +13,15 @@ let ww = window.innerWidth,
 const orbs = [
   {
     img: 'assets/nhII.png',
+    hoverBlurb: 'Software Engineer',
   },
   {
     img: 'assets/rg.jpeg',
+    hoverBlurb: 'Software Engineer',
   },
   {
     img: 'assets/NRDSII.png',
+    hoverBlurb: 'Sales and Partnerships',
   },
 ];
 
@@ -29,21 +30,25 @@ const createOrb = (orb) => {
   div.setAttribute('class', `orbContainer`);
   div.setAttribute('id', orb['id']);
   div.innerHTML = `
-    <div class="test">hi there</div>
+    <div class="hoverBlurb">${orb['hoverBlurb']}</div>
     <div class="imgContainer"><img src="${orb['img']}" /></div>
   `;
   document.getElementById('mainContainer').appendChild(div);
   initialOrbPosition(orb);
-  // animateOrb(div, orb);
-  // stopOnHover(div, orb);
+  animateOrb(div, orb);
+  stopOnHover(div, orb);
 };
 
 const stopOnHover = (div, orb) => {
+  let hoverClass =
+    orb['translateX'] < xMax / 2 ? 'hoverBlurbRight' : 'hoverBlurbLeft';
   div.addEventListener('mouseenter', () => {
     window.cancelAnimationFrame(orb['request']);
+    div.firstElementChild.classList.add(hoverClass);
   });
   div.addEventListener('mouseleave', () => {
     animateOrb(div, orb);
+    div.firstElementChild.classList.remove(hoverClass);
   });
 };
 
@@ -54,8 +59,8 @@ const animateOrb = (div, orb) => {
 };
 
 const initialOrbPosition = (orb) => {
-  const initialX = Math.floor(Math.random() * ww + 1);
-  const initialY = Math.floor(Math.random() * wh + 1);
+  const initialX = Math.floor(Math.random() * xMax + 1);
+  const initialY = Math.floor(Math.random() * yMax + 1);
   orb['translateX'] = initialX;
   orb['translateY'] = initialY;
 };
