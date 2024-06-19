@@ -40,9 +40,10 @@ const createOrb = (orb) => {
 };
 
 const stopOnHover = (div, orb) => {
-  let hoverClass =
-    orb['translateX'] < xMax / 2 ? 'hoverBlurbRight' : 'hoverBlurbLeft';
+  let hoverClass = ''
   div.addEventListener('mouseenter', () => {
+    hoverClass =
+      orb['translateX'] < xMax / 2 ? 'hoverBlurbRight' : 'hoverBlurbLeft';
     window.cancelAnimationFrame(orb['request']);
     div.firstElementChild.classList.add(hoverClass);
   });
