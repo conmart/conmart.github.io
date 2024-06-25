@@ -58,3 +58,10 @@
   display: block;
 }
 
+.popup {
+  display: none;
+}
+
+.showPopup {
+  display: block;
+}

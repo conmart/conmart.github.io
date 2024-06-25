@@ -14,30 +14,60 @@ const orbs = [
   {
     img: 'assets/nhII.png',
     hoverBlurb: 'Software Engineer',
+    popupHtml: '<div>Test1</div>'
   },
   {
     img: 'assets/rg.jpeg',
     hoverBlurb: 'Software Engineer',
+    popupHtml: '<div>Test2</div>'
   },
   {
     img: 'assets/NRDSII.png',
     hoverBlurb: 'Sales and Partnerships',
+    popupHtml: '<div>Test3</div>'
   },
 ];
 
 const createOrb = (orb) => {
   const div = document.createElement('DIV');
-  div.setAttribute('class', `orbContainer`);
+  const buttonId = orb['id'] + 'PopupTrigger';
+  div.setAttribute('class', 'orbContainer');
   div.setAttribute('id', orb['id']);
   div.innerHTML = `
-    <div class="hoverBlurb">${orb['hoverBlurb']}</div>
+    <div class="hoverBlurb">
+      <div>${orb['hoverBlurb']}</div>
+      <button id="${buttonId}">Learn More</button>
+    </div>
     <div class="imgContainer"><img src="${orb['img']}" /></div>
   `;
   document.getElementById('mainContainer').appendChild(div);
+  createPopup(orb);
   initialOrbPosition(orb);
   animateOrb(div, orb);
   stopOnHover(div, orb);
 };
+
+const createPopup = (orb) => {
+  const div = document.createElement('DIV');
+  div.setAttribute('class', 'popup');
+  div.setAttribute('id', orb['id'] + 'Popup');
+  div.innerHTML =
+    orb['popupHtml'] + `<button id="${orb['id']}ClosePopup">Close</button>`;
+  document.getElementById('popups').appendChild(div);
+  popupToggle(orb);
+}
+
+const popupToggle = (orb) => {
+  const popup = document.getElementById(orb['id'] + 'Popup');
+  document.getElementById(orb['id'] + 'PopupTrigger').addEventListener("click", () => {
+    popup.classList.add('showPopup');
+  });
+  document
+    .getElementById(orb['id'] + 'ClosePopup')
+    .addEventListener('click', () => {
+      popup.classList.remove('showPopup');
+    });
+}
 
 const stopOnHover = (div, orb) => {
   let hoverClass = ''
