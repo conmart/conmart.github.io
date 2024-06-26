@@ -7,7 +7,7 @@ let boxWidth = 118,
   xMax = window.innerWidth - boxLeft - boxWidth,
   yMax = window.innerHeight - boxTop - boxHeight,
   directions = ['se', 'sw', 'ne', 'nw'],
-  speed = 2,
+  speed = 0,
   timeout = null;
 
 const orbs = [
@@ -26,6 +26,11 @@ const orbs = [
     hoverBlurb: 'Sales and Partnerships',
     popupHtml: '<div>Test3</div>'
   },
+  {
+    img: 'assets/Headshot1-small.jpg',
+    hoverBlurb: 'About me',
+    popupHtml: '<div>Test4</div>'
+  }
 ];
 
 const createOrb = (orb) => {
@@ -59,13 +64,16 @@ const createPopup = (orb) => {
 
 const popupToggle = (orb) => {
   const popup = document.getElementById(orb['id'] + 'Popup');
+  const popupContainer = document.getElementById('popups');
   document.getElementById(orb['id'] + 'PopupTrigger').addEventListener("click", () => {
     popup.classList.add('showPopup');
+    popupContainer.classList.add('showPopup')
   });
   document
     .getElementById(orb['id'] + 'ClosePopup')
     .addEventListener('click', () => {
       popup.classList.remove('showPopup');
+      popupContainer.classList.remove('showPopup');
     });
 }
 
