@@ -65,16 +65,24 @@ const createPopup = (orb) => {
 const popupToggle = (orb) => {
   const popup = document.getElementById(orb['id'] + 'Popup');
   const popupContainer = document.getElementById('popups');
-  document.getElementById(orb['id'] + 'PopupTrigger').addEventListener("click", () => {
-    popup.classList.add('showPopup');
-    popupContainer.classList.add('showPopup')
-  });
+  const buttonTrigger = document.getElementById(orb['id'] + 'PopupTrigger');
+  const imageTrigger = document.getElementById(orb['id']).lastElementChild;
+  console.log(buttonTrigger, imageTrigger, 'triggers')
+  showPopupEventListener(buttonTrigger, popup, popupContainer)
+  showPopupEventListener(imageTrigger, popup, popupContainer)
   document
     .getElementById(orb['id'] + 'ClosePopup')
     .addEventListener('click', () => {
       popup.classList.remove('showPopup');
       popupContainer.classList.remove('showPopup');
     });
+}
+
+const showPopupEventListener = (div, popup, popupContainer) => {
+  div.addEventListener("click", () => {
+    popup.classList.add('showPopup');
+    popupContainer.classList.add('showPopup')
+  });
 }
 
 const stopOnHover = (div, orb) => {
