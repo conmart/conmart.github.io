@@ -7,30 +7,48 @@ let boxWidth = 118,
   xMax = window.innerWidth - boxLeft - boxWidth,
   yMax = window.innerHeight - boxTop - boxHeight,
   directions = ['se', 'sw', 'ne', 'nw'],
-  speed = 0,
+  speed = 2,
   timeout = null;
 
 const orbs = [
   {
     img: 'assets/nhII.png',
-    hoverBlurb: 'Software Engineer',
-    popupHtml: '<div>Test1</div>'
+    hoverBlurb: `<div>Technical Support and Software Engineering</div>
+      <div>2020-2023</div>`,
+    popupHtml: '<div>Test1</div>',
   },
   {
     img: 'assets/rg.jpeg',
-    hoverBlurb: 'Software Engineer',
-    popupHtml: '<div>Test2</div>'
+    hoverBlurb: `<div>Technical Support and Software Engineering</div>
+      <div>2017-2020</div>`,
+    popupHtml: '<div>Test2</div>',
   },
   {
     img: 'assets/NRDSII.png',
-    hoverBlurb: 'Sales and Partnerships',
-    popupHtml: '<div>Test3</div>'
+    hoverBlurb: '<div>Sales and Partnerships</div><div>2014-2017</div>',
+    popupHtml: '<div>Test3</div>',
   },
   {
     img: 'assets/Headshot1-small.jpg',
-    hoverBlurb: 'About me',
-    popupHtml: '<div>Test4</div>'
-  }
+    hoverBlurb: `
+      <div>Connor Martinelli</div>
+      <div>
+        <a href="mailto:connor.a.martinelli@gmail.com">email</a>
+        <a href="https://github.com/conmart" target="_blank">GitHub</a>
+      </div>`,
+    popupHtml: `
+      <div>Hello There! Thanks for visiting.</div>
+      <div>
+        <a href="mailto:connor.a.martinelli@gmail.com">email</a>
+        <a href="https://github.com/conmart" target="_blank">GitHub</a>
+      </div>`,
+  },
+  {
+    img: 'assets/script_cal2.jpg',
+    hoverBlurb: `<div>BA Psychology 2013</div>
+      <div>Relevant Courses: CS10, CS61A</div>`,
+    popupHtml: '<div>Test4</div>',
+  },
 ];
 
 const createOrb = (orb) => {
@@ -40,8 +58,8 @@ const createOrb = (orb) => {
   div.setAttribute('id', orb['id']);
   div.innerHTML = `
     <div class="hoverBlurb">
-      <div>${orb['hoverBlurb']}</div>
-      <button id="${buttonId}">Learn More</button>
+      ${orb['hoverBlurb']}
+      <div><button class="learnMore" id="${buttonId}">Learn More</button></div>
     </div>
     <div class="imgContainer"><img src="${orb['img']}" /></div>
   `;
@@ -60,33 +78,32 @@ const createPopup = (orb) => {
     orb['popupHtml'] + `<button id="${orb['id']}ClosePopup">Close</button>`;
   document.getElementById('popups').appendChild(div);
   popupToggle(orb);
-}
+};
 
 const popupToggle = (orb) => {
   const popup = document.getElementById(orb['id'] + 'Popup');
   const popupContainer = document.getElementById('popups');
   const buttonTrigger = document.getElementById(orb['id'] + 'PopupTrigger');
   const imageTrigger = document.getElementById(orb['id']).lastElementChild;
-  console.log(buttonTrigger, imageTrigger, 'triggers')
-  showPopupEventListener(buttonTrigger, popup, popupContainer)
-  showPopupEventListener(imageTrigger, popup, popupContainer)
+  showPopupEventListener(buttonTrigger, popup, popupContainer);
+  showPopupEventListener(imageTrigger, popup, popupContainer);
   document
     .getElementById(orb['id'] + 'ClosePopup')
     .addEventListener('click', () => {
       popup.classList.remove('showPopup');
       popupContainer.classList.remove('showPopup');
     });
-}
+};
 
 const showPopupEventListener = (div, popup, popupContainer) => {
-  div.addEventListener("click", () => {
+  div.addEventListener('click', () => {
     popup.classList.add('showPopup');
-    popupContainer.classList.add('showPopup')
+    popupContainer.classList.add('showPopup');
   });
-}
+};
 
 const stopOnHover = (div, orb) => {
-  let hoverClass = ''
+  let hoverClass = '';
   div.addEventListener('mouseenter', () => {
     hoverClass =
       orb['translateX'] < xMax / 2 ? 'hoverBlurbRight' : 'hoverBlurbLeft';

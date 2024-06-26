@@ -1,5 +1,13 @@
+button {
+  border-radius: 4rem;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  padding: 5px 20px;
+}
+
 .imgContainer {
-  background: beige;
+  background: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,12 +16,21 @@
   overflow: hidden;
   width: 100%;
   height: 100%;
-  border: 3px solid black;
+  border: 6px solid #CFBAE1;
   cursor: pointer;
 }
 
 .imgContainer img {
   max-width: 105%;
+}
+
+#mainContainer {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #C1E0F7;
 }
 
 .orbContainer {
@@ -33,27 +50,35 @@
 
 .hoverBlurb {
   position: absolute;
-  background-color: pink;
+  background-color: #C59FC9;
   width: 10rem;
   height: 100%;
-  padding: 3px;
+  padding: 6px;
   display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hoverBlurb div {
+  margin: 5px;
+  text-align: center;
 }
 
 .hoverBlurbLeft {
   right: 50%;
-  border-radius: 2rem 0 0 2rem;
-  padding-right: 5rem;
-  padding-left: 2rem;
-  display: block;
+  border-radius: 4rem 0 0 4rem;
+  padding-right: 4rem;
+  padding-left: 2.5rem;
+  display: flex;
 }
 
 .hoverBlurbRight {
   left: 50%;
-  border-radius: 0 2rem 2rem 0;
-  padding-left: 5rem;
-  padding-right: 2rem;
-  display: block;
+  border-radius: 0 4rem 4rem 0;
+  padding-left: 4rem;
+  padding-right: 2.5rem;
+  display: flex;
 }
 
 .popup {
@@ -65,6 +90,14 @@
   margin: 0 auto;
   background: white;
   border: 3px solid black;
+  padding: 1rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup div {
+  padding: 1rem;
 }
 
 .popupContainer {
@@ -74,8 +107,9 @@
   top: 0;
   left: 0;
   display: none;
+  background-color: rgba(0, 0, 0, 0.75);
 }
 
 .showPopup {
-  display: block;
+  display: flex;
 }
