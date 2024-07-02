@@ -1,4 +1,4 @@
-let orbSidePx = 124,
+let orbSidePx = 127,
   xMin = 0,
   yMin = 0,
   speed = 2,

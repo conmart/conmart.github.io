@@ -35,6 +35,6 @@ export const orbs = [
     img: 'assets/script_cal2.jpg',
     hoverBlurb: `<div>BA Psychology 2013</div>
       <div>Relevant Courses: CS10, CS61A</div>`,
-    popupHtml: '<div>Test4</div>',
+    popupHtml: '<div>Proud UC Berkeley Alumnus</div>',
   },
 ];

@@ -16,12 +16,14 @@ const animateOrb = (div, orb) => {
 const stopOnHover = (div, orb) => {
   let hoverClass = '';
   div.addEventListener('mouseenter', () => {
+    div.classList.add('front')
     hoverClass =
       orb['translateX'] < xMax / 2 ? 'hoverBlurbRight' : 'hoverBlurbLeft';
     window.cancelAnimationFrame(orb['request']);
     div.firstElementChild.classList.add(hoverClass);
   });
   div.addEventListener('mouseleave', () => {
+    div.classList.remove('front');
     animateOrb(div, orb);
     div.firstElementChild.classList.remove(hoverClass);
   });
