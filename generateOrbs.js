@@ -22,11 +22,11 @@ const stopOnHover = (div, orb) => {
     window.cancelAnimationFrame(orb['request']);
     div.firstElementChild.classList.add(hoverClass);
   });
-  // div.addEventListener('mouseleave', () => {
-  //   div.classList.remove('front');
-  //   animateOrb(div, orb);
-  //   div.firstElementChild.classList.remove(hoverClass);
-  // });
+  div.addEventListener('mouseleave', () => {
+    div.classList.remove('front');
+    animateOrb(div, orb);
+    div.firstElementChild.classList.remove(hoverClass);
+  });
 };
 
 const showPopupEventListener = (div, popup, popupContainer) => {
