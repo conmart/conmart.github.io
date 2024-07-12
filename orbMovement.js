@@ -1,7 +1,7 @@
 let orbSidePx = 127,
   xMin = 0,
   yMin = 0,
-  speed = 2,
+  speed = 0,
   timeout = null;
 
 export let xMax = window.innerWidth - orbSidePx;
