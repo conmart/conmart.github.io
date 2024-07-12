@@ -3,13 +3,37 @@ export const orbs = [
     img: 'assets/nhII.png',
     hoverBlurb: `<div>Technical Support and Software Engineering</div>
       <div>2020-2023<span class="unicorn">&#129412;</span></div>`,
-    popupHtml: '<div>Test1</div>',
+    popupHtml: `
+      <div>
+        I joined NexHealth as a T3 support engineer acting as a buffer between 
+        the support and engineering orgs. I had the opportunity to wear many 
+        hats including sales engineering, solution engineering for API partners 
+        and running technical trainings for the support org, but most of my time 
+        was spent cutting tickets for engineering and deploying hotfixes.
+      </div><div>
+        I then transitioned to engineering full time specializing in supporting 
+        our non-cloud software integrations. This included adding new 
+        functionality, bolstering tests, and refactoring our read cycles to make 
+        our integrations far more efficient.
+      </div>`,
   },
   {
     img: 'assets/rg.jpeg',
     hoverBlurb: `<div>Technical Support and Software Engineering</div>
       <div>2017-2020</div>`,
-    popupHtml: '<div>Test2</div>',
+    popupHtml: `
+      <div>
+        Fresh out of General Assembly's web developer bootcamp my first role in 
+        working directly with software came as a support engineer for Rooster 
+        Grin - a small web shop specializing in building and maintaining 
+        websites for orthodontists.
+      </div><div>
+        After a year of web development I joined Rooster Grin's full stack team 
+        working on integrating with 3rd party practice management systems to 
+        provide appointment scheduling and reminders for patients. Eventually I 
+        became the most senior engineer on the team and co-lead our pod of three 
+        engineers.
+      </div>`,
   },
   {
     img: 'assets/NRDSII.png',
