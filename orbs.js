@@ -95,7 +95,7 @@ export const orbs = [
         Dayta is an app made with React and Firebase to track various activities 
         in your life. Think of a "done list" instead of a "to-do" list.</div>
       <div>
-        <a href="https://github.com/conmart/dayta" target="_blank">GitHub Reop</a>
+        <a href="https://github.com/conmart/dayta" target="_blank">GitHub Repo</a>
         <a href="https://dayta-768d8.web.app/" target="_blank">Deployed App</a>
       </div>`,
   },

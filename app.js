@@ -12,4 +12,14 @@ window.addEventListener('load', () => {
     createOrb(orb);
     orbIndex++;
   });
+
+  const popupOverlay = document.getElementById('popups');
+  popupOverlay.addEventListener('click', (e) => {
+    if (e.target.id == 'popups') {
+      const activePopups = Array.from(document.getElementsByClassName('showPopup'))
+      activePopups.forEach((activePopup) => {
+        activePopup.classList.remove('showPopup');
+      })
+    }
+  })
 });
