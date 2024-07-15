@@ -104,24 +104,27 @@ button {
 
 .popup {
   display: none;
-  position: relative;
+  position: absolute;
   width: 50%;
   min-height: 50%;
   max-height: 80%;
   margin: 0 auto;
   background: white;
   border: 5px solid #34a0a4;
-  padding: 1rem;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
   padding: 1rem;
   overflow: auto;
   border-radius: 1rem;
 }
 
-.popup div {
+.popupInner {
+  margin: auto;
+}
+
+.popupInner div {
   padding: 1rem;
 }
 
@@ -144,8 +147,8 @@ button {
 
 .showPopup {
   display: flex;
+  flex-direction: column;
   z-index: 3;
-  align-items: center;
 }
 
 .front {
@@ -158,4 +161,10 @@ button {
 
 a {
   margin: 0px 5px;
+}
+
+@media only screen and (max-width: 500px) {
+  .popup {
+    width: 70%;
+  }
 }

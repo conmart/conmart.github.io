@@ -1,8 +1,8 @@
 import { orbs } from './orbs.js';
 import { createOrb } from './generateOrbs.js';
-  
-const directions = ['se', 'sw', 'ne', 'nw']
-  
+
+const directions = ['se', 'sw', 'ne', 'nw'];
+
 window.addEventListener('load', () => {
   let orbIndex = 0;
   orbs.forEach((orb) => {
@@ -16,10 +16,12 @@ window.addEventListener('load', () => {
   const popupOverlay = document.getElementById('popups');
   popupOverlay.addEventListener('click', (e) => {
     if (e.target.id == 'popups') {
-      const activePopups = Array.from(document.getElementsByClassName('showPopup'))
+      const activePopups = Array.from(
+        document.getElementsByClassName('showPopup')
+      );
       activePopups.forEach((activePopup) => {
         activePopup.classList.remove('showPopup');
-      })
+      });
     }
-  })
+  });
 });

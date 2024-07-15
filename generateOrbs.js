@@ -55,8 +55,11 @@ const createPopup = (orb) => {
   const div = document.createElement('DIV');
   div.setAttribute('class', 'popup');
   div.setAttribute('id', orb['id'] + 'Popup');
-  div.innerHTML =
-    orb['popupHtml'] + `<button id="${orb['id']}ClosePopup">Close</button>`;
+  div.innerHTML = `
+    <div class="popupInner">
+      ${orb['popupHtml']}
+      <button id="${orb['id']}ClosePopup">Close</button>
+    </div>`;
   document.getElementById('popups').appendChild(div);
   popupToggle(orb);
 };
