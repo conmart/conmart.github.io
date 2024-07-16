@@ -16,7 +16,7 @@ const animateOrb = (div, orb) => {
 const stopOnHover = (div, orb) => {
   let hoverClass = '';
   div.addEventListener('mouseenter', () => {
-    div.classList.add('front')
+    div.classList.add('front');
     hoverClass =
       orb['translateX'] < xMax / 2 ? 'hoverBlurbRight' : 'hoverBlurbLeft';
     window.cancelAnimationFrame(orb['request']);
@@ -80,5 +80,7 @@ export const createOrb = (orb) => {
   createPopup(orb);
   initialOrbPosition(orb);
   animateOrb(div, orb);
-  stopOnHover(div, orb);
+  if (!('ontouchstart' in document.documentElement)) {
+    stopOnHover(div, orb);
+  }
 };
