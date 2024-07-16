@@ -1,4 +1,4 @@
-let orbSidePx = 127,
+let orbSidePx = 125,
   xMin = 0,
   yMin = 0,
   speed = 2,
@@ -96,7 +96,8 @@ const setStyle = (orb, properties) => {
 
 const slider = document.getElementById('orbSpeed');
 slider.oninput = () => {
-  speed = parseInt(slider.value) / 2;
+  const rawSpeed = parseInt(slider.value);
+  speed = (rawSpeed * rawSpeed) / 8;
 };
 
 const updateWindowMinMax = () => {
