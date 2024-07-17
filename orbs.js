@@ -67,6 +67,11 @@ export const orbs = [
       <div>
         <a href="mailto:connor.a.martinelli@gmail.com">Email</a>
         <a href="https://github.com/conmart" target="_blank">GitHub</a>
+      </div><div>
+        <a href="assets/ConnorMartinelli_Resume_2024.pdf" target="_blank">Resume</a>
+        <a href="https://www.linkedin.com/in/connormartinelli/" target="_blank">
+          LinkedIn
+        </a>
       </div>`,
   },
   {
