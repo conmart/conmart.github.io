@@ -40,6 +40,7 @@ a {
   height: 100%;
   border: 6px solid #99d98c;
   cursor: pointer;
+  box-shadow: 5px 5px 5px 5px  rgb(0 0 0 / 50%);
 }
 
 .imgContainer img {
@@ -56,6 +57,8 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 4rem;
+  box-shadow: 5px 5px 5px 5px  rgb(0 0 0 / 50%);
 }
 
 .hoverBlurb div {
@@ -68,17 +71,14 @@ a {
 }
 
 .hoverBlurbLeft {
-  right: 50%;
-  border-radius: 4rem 0 0 4rem;
-  padding-right: 4rem;
+  right: 0%;
+  padding-right: 8rem;
   padding-left: 2.5rem;
   display: flex;
 }
 
 .hoverBlurbRight {
-  left: 50%;
-  border-radius: 0 4rem 4rem 0;
-  padding-left: 4rem;
+  padding-left: 8rem;
   padding-right: 2.5rem;
   display: flex;
 }
@@ -160,6 +160,10 @@ a {
 
 .front {
   z-index: 2;
+}
+
+.front .imgContainer {
+  box-shadow: none;
 }
 
 .unicorn {
