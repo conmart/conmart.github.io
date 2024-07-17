@@ -24,4 +24,24 @@ window.addEventListener('load', () => {
       });
     }
   });
+
+  document.getElementById('reverse').addEventListener('click', () => {
+    console.log('clikkkk');
+    orbs.forEach((orb) => {
+      switch (orb['direction']) {
+        case 'ne':
+          orb['direction'] = 'sw';
+          break;
+        case 'sw':
+          orb['direction'] = 'ne';
+          break;
+        case 'nw':
+          orb['direction'] = 'se';
+          break;
+        case 'se':
+          orb['direction'] = 'nw';
+          break;
+      }
+    });
+  });
 });

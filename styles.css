@@ -158,6 +158,11 @@ a {
   background: #99d98c;
 }
 
+#reverse {
+  background-color: #168aad;
+  margin-top: 10px;
+}
+
 .front {
   z-index: 2;
 }
